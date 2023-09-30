@@ -1,0 +1,35 @@
+"use strict";
+
+const toasts = document.getElementById("toasts");
+const btn = document.getElementById("button");
+
+const messages = [
+  "Message One",
+  "Message Two",
+  "Message Three",
+  "Message Four",
+];
+
+const types = ["info", "success", "error"];
+
+const getRandomMessage = function () {
+  return messages[Math.floor(Math.random() * messages.length)];
+};
+
+const getRandomType = function () {
+  return types[Math.floor(Math.random() * messages.length)];
+};
+
+const createNotification = function (message = null, type = null) {
+  const notif = document.createElement("div");
+  notif.classList.add("toast");
+  notif.classList.add(type ? type : getRandomType());
+  notif.innerText = message ? message : getRandomMessage();
+  toasts.appendChild(notif);
+
+  setTimeout(() => {
+    notif.remove();
+  }, 3000);
+};
+
+btn.addEventListener("click", () => createNotification());
